@@ -1,4 +1,4 @@
-function [th dt] = fn_get1Sim_test(Mw,Rrup,Vs30,rs,iflg)
+function [th dt] = fn_get1Sim_PL(prmcoef0,rs)
 % generating ONE ground motion
 % 10/31/2010
 % coded by Yoshi Yamamoto (Stanford University)
@@ -19,7 +19,7 @@ while(ierr~=0);
 % get parameters from regression equations
 %     [prmcoef0]=fn_getPARAM8(Mw,Rrup,Rhyp,Vs30,filereg);
     
-    [prmcoef0]=fn_PredictWaveletPara_PL(Mw,Rrup,Vs30,iflg);
+    
 
     prmcoef=prmcoef0(1);
     x=prm.wavelet.dx.*[1:1:prm.wavelet.nTimeWindow];

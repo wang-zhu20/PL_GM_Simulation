@@ -35,7 +35,7 @@ ind=1;
 
 
 Mw(ind)=7.0;	Rrup(ind)=10;	Rhyp(ind)= 10;	Vs30(ind)= 760; 
-SorD(ind) = 53;    nsmpl(ind)= 1;  	ind=ind+1;
+SorD(ind) = 53;    nsmpl(ind)= 10;  	ind=ind+1;
 
 % 
 % Mw(ind)=7.5;	Rrup(ind)=10;	Rhyp(ind)= 10;	Vs30(ind)= 760; 
@@ -66,10 +66,11 @@ for j=1:1:ncase
     for i=1:1:nsmpl(j)
         disp(['computing... smpl' num2str(i,'% 6d') '/' num2str(nsmpl(j),'% 6d') '| case' num2str(j,'% 6d') '/' num2str(ncase,'% 6d')]);
 
-
-        [th dt] = fn_get1Sim_PL(Mw(j),Rrup(j),Vs30(j),rs,iflg);
+        [prmcoef,plcoef]=fn_PredictPara_PL(Mw(j),Rrup(j),Vs30(j),SorD(j),iflg);
         
-        [Pulse_record, dt,Vp,Tp,Et,Eacc] = sim_single(Mw(j),Rrup(j),Vs30(j),SorD(j));
+        [th dt] = fn_get1Sim_PL(prmcoef,rs);
+        
+        [Pulse_record, dt,Vp,Tp,Et,Eacc] = sim_single(plcoef);
         
         acc_raw = extract_major(th);
 
